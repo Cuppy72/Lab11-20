@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "files.h"
@@ -9,7 +10,8 @@
 #define FILE_OPEN_ERROR 13
 #define FILE_CLOSE_ERROR 14
 #define WRITE_FILE_ERROR 15
-
+#define ALLOC_ERROR 16
+#define IDENTITY_FILES 17
 
 int safety_close_files(FILE *file_1, FILE *file_2)
 {
@@ -24,27 +26,27 @@ int safety_close_files(FILE *file_1, FILE *file_2)
 	return SUCCESS;
 }
 
-static char *pick_filename(char *file_path)
+int equal_filenames(char *file_path_1, char *file_path_2, int *result)
 {
-	char *name = strrchr(file_path, '/');
+	char *resolved_filepath_1 = realpath(file_path_1, NULL);
+	
+	if(resolved_filepath_1 == NULL)
+		return ALLOC_ERROR;
 
-	if(name == NULL)
-		name = file_path;
-	else
-		name++;
+	char *resolved_filepath_2 = realpath(file_path_2, NULL);
 
-	return name;
-}
+	if(resolved_filepath_2 == NULL) {
+		free(resolved_filepath_1);
+		
+		return ALLOC_ERROR;
+	}
 
-int equal_filenames(char *file_path_1, char *file_path_2)
-{
-	char *filename_1 = pick_filename(file_path_1);
-	char *filename_2 = pick_filename(file_path_2);
+	*result = strcmp(resolved_filepath_1, resolved_filepath_2);
 
-	if(strcmp(filename_1, filename_2) == 0)
-		return 1;
+	free(resolved_filepath_1);
+	free(resolved_filepath_2);
 
-	return 0;
+	return SUCCESS;
 }
 
 int validate_open_files(FILE *file_1, FILE *file_2)
