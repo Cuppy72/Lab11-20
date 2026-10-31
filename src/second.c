@@ -7,20 +7,13 @@
 
 #include "files.h"
 #include "overflow.h"
+#include "self_errors.h"
 
 #define INPUT_IND 1
 #define FLAG_IND 2
 #define OUTPUT_IND 3
 
 #define MIN_CAPACITY 4
-
-#define INCORRECT_FORMAT 21
-#define EMPTY_FILE 22
-#define INCORRECT_FLAG 23
-#define INCORRECT_ID 24
-#define OVERFLOW 25
-#define NOT_ENOUGH_ARGS 26
-#define NOT_A_NUM -2
 
 typedef struct Employee
 {

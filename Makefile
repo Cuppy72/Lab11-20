@@ -1,14 +1,18 @@
-1: overflow_lib include/overflow.h
+1: overflow_lib include/overflow.h include/self_errors.h
 	gcc ./src/first.c -I./include -L./impl -lOverflow -Wl,-rpath,'$$ORIGIN/../impl' -o ./bin/first
 
-2: overflow_lib include/overflow.h file_lib include/files.h
-	gcc ./src/second.c -I./include -L./impl -lOverflow -lFiles -Wl,-rpath,'$$ORIGIN/../impl' -o ./bin/second
+2: file_lib overflow_lib include/files.h include/overflow.h include/self_errors.h
+	gcc ./src/second.c -I./include -L./impl -lFiles -lOverflow -Wl,-rpath,'$$ORIGIN/../impl' -o ./bin/second
+
+3: overflow_lib patterns_lib include/overflow.h include/patterns.h include/self_errors.h
+	gcc ./src/third.c -I./include -L./impl -lOverflow -lPatterns -Wl,-rpath,'$$ORIGIN/../impl' -o ./bin/third
+
 
 overflow_lib: include/overflow.h
 	gcc -fPIC -shared lib/overflow.c -I./include -o ./impl/libOverflow.so
-file_lib: include/files.h
+
+file_lib: include/files.h include/self_errors.h
 	gcc -fPIC -shared lib/files.c -I./include -o ./impl/libFiles.so
 
-clean_1:
-	rm -f ./bin/first ./impl/libOverflow.so
-
+patterns_lib: include/patterns.h include/self_errors.h
+	gcc -fPIC -shared lib/search_patterns.c -I./include -o ./impl/libPatterns.so

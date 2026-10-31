@@ -3,15 +3,9 @@
 #include <string.h>
 
 #include "files.h"
+#include "self_errors.h"
 
 #define BUFF_SIZE 1024
-
-#define SUCCESS 10
-#define FILE_OPEN_ERROR 13
-#define FILE_CLOSE_ERROR 14
-#define WRITE_FILE_ERROR 15
-#define ALLOC_ERROR 16
-#define IDENTITY_FILES 17
 
 int safety_close_files(FILE *file_1, FILE *file_2)
 {

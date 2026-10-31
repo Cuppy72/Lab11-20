@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #include "overflow.h"
+#include "self_errors.h"
 
 #define FLAG_IND 1
 #define STR_IND 2
@@ -11,16 +12,6 @@
 #define EXTRA_START_IND 4
 
 #define BUFF_SIZE 15
-
-#define SUCCESS 10
-#define NOT_ENOUGH_ARGS 11
-#define INCORRECT_FLAG 12
-#define ALLOC_ERROR 13
-#define INCORRECT_SEED 14
-#define INCORRECT_SYMB 15
-#define INCORRECT_COUNT_ARGC 16
-#define NOT_A_NUM -2
-#define OVERFLOW 17
 
 static int is_ascii(unsigned char symb)
 {
