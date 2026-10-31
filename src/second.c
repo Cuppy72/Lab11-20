@@ -164,10 +164,8 @@ static int compare_asc(const void *left, const void *right)
         if(emp_left->salary < emp_right->salary)
                 return -1;
 
-        if(emp_left->salary > emp_right->salary) {
-		puts("Але вы ебнулись");
+        if(emp_left->salary > emp_right->salary)
                 return 1;
-	}
 
         int surname_cmp = strcmp(emp_left->surname, emp_right->surname);
 

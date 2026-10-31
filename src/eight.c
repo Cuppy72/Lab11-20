@@ -200,7 +200,7 @@ int main(void)
         if(demo_sum(2, 3, bin_numbers) != SUCCESS)
                 return 1;
 
-        const char *d36_numbers[] = {"z", "10", "100000000000000000000000000000000000000"};
+        const char *d36_numbers[] = {"9999999", "10000000000000", "100000000000000000000000000000000000000"};
 
         if(demo_sum(36, 3, d36_numbers) != SUCCESS)
                 return 1;
